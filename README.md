@@ -4,7 +4,9 @@ A speed reader that shows one word at a time in the same spot. The red focus let
 
 ## Open it
 
-Double-click `index.html` to open it in any browser. There's nothing to install and no build step.
+**Online:** https://mario020mg.github.io/Word-Reader/ (works on phones too).
+
+Or locally: Double-click `index.html` to open it in any browser. There's nothing to install and no build step.
 (Reading PDFs loads pdf.js from a CDN, so PDFs need an internet connection. Pasted text works offline.)
 
 ## Use it
