@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Word Reader</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- pdf.js (PDF text extraction and page rendering), loaded from CDN; only needed for PDFs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="app">
+   <div class="left">
+    <h1 class="title">Word Reader</h1>
+
+    <!-- Reader area -->
+    <section class="reader" aria-label="Reader">
+      <div class="guide guide-top"></div>
+      <div id="display" class="display" aria-live="off">
+        <span id="before" class="before"></span><span id="focus" class="focus"></span><span id="after" class="after"></span>
+      </div>
+      <div class="guide guide-bottom"></div>
+      <div id="status" class="status">Paste text or open a PDF below, then press Start.</div>
+    </section>
+
+    <!-- Progress -->
+    <div class="progress-wrap">
+      <input id="progress" type="range" min="0" max="0" value="0" aria-label="Position">
+      <span id="counter" class="counter">0 / 0</span>
+    </div>
+
+    <!-- Controls area -->
+    <section class="controls" aria-label="Controls">
+      <div class="buttons">
+        <button id="back" title="Back one word (←)">⏮</button>
+        <button id="play" class="primary" title="Play / Pause (Space)">▶ Play</button>
+        <button id="fwd" title="Forward one word (→)">⏭</button>
+        <button id="restart" title="Restart">↺ Restart</button>
+      </div>
+
+      <div class="speed" id="speedBox" title="Scroll the mouse wheel here to change speed">
+        <label for="wpmRange">Speed</label>
+        <input id="wpmRange" type="range" min="100" max="1500" step="10" value="300">
+        <input id="wpmNum" type="number" min="50" max="5000" step="10" value="300" aria-label="Words per minute">
+        <span class="wpm-label"><strong id="wpmLabel">300</strong> WPM</span>
+      </div>
+
+      <label class="check">
+        <input id="punct" type="checkbox" checked> Pause longer on punctuation
+      </label>
+    </section>
+   </div>
+
+    <!-- Text panel (right side): textarea for editing, document view while reading -->
+    <section class="input" aria-label="Text">
+      <div class="panel-head">
+        <span class="panel-title">Text</span>
+        <div id="viewSwitch" class="view-switch" role="group" aria-label="View" hidden>
+          <button id="viewPdf" class="small" aria-pressed="false" title="Show the real PDF pages">PDF</button>
+          <button id="viewText" class="small" aria-pressed="false" title="Show the extracted text">Text</button>
+        </div>
+        <button id="edit" class="small" disabled>👁 View text</button>
+      </div>
+      <textarea id="text" placeholder="Paste the text you want to read here…"></textarea>
+      <div id="doc" class="doc" hidden></div>
+      <div id="pdf" class="pdf-view" hidden></div>
+      <div class="input-row">
+        <label class="file-btn">
+          📄 Open PDF / TXT
+          <input id="file" type="file" accept=".pdf,.txt,application/pdf,text/plain" hidden>
+        </label>
+        <button id="start" class="primary">Start</button>
+      </div>
+      <p class="hint">Keys: <kbd>Space</kbd> play/pause · <kbd>←</kbd>/<kbd>→</kbd> step a word · <kbd>Shift</kbd>+<kbd>←</kbd>/<kbd>→</kbd> jump a sentence · <kbd>↑</kbd>/<kbd>↓</kbd> speed ±25 · click a word in the text or the PDF to jump there</p>
+    </section>
+  </main>
+</body>
+</html>
